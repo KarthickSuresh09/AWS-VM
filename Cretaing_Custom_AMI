@@ -22,3 +22,42 @@ Step 7:
 
 Step 8:
     And leave it rest of a default hit launch instance button 
+
+Step 9:
+    Now you can connect vm with RDP username is "Administrator" and password you decrypt the password with pem file
+
+Step 10:
+    Now you can configure the Vm like install like java whatever 
+
+Step 11:
+    Now Select the instance you prepared On top, click Actions → Image and templates → Create image.
+
+Step 12:
+      * Enter the Image name 
+      * Tags - optional (chose the option Tag image and snapshots together) 
+      * Leave it rest of them as default and click create image
+
+Step 13:
+    your AMI will get in left side images option in AMIs if its availabe status now you can create a your custom VM
+
+Step 14:
+    create ec2 instance same like but AMI only you need to chose the your AMI and select your old EC2 pem file
+
+Step 15:
+      * if your using windows vm you can't get decrypt the password from your new EC2 machine 
+      * just go and connect your old EC2 and decrypt the password use this password in your new EC2 machine
+
+Step 16:
+      * If your configured the webserver IIS in your old EC2 it will not work in your new EC2 and you need to restart manually 
+      the webserver IIS in your new EC2 machine and this powerchell commands 
+       this command will restart the webserver IIS (iisreset)
+
+Id CommandLine
+  -- -----------
+   1 Get-Service W3SVC
+   2 Get-NetFirewallRule | findstr HTTP
+   3 Start-Service W3SVC
+   4 netstat -ano | findstr :80
+   5 Get-NetFirewallRule -DisplayName "*World Wide Web*"
+   6 New-NetFirewallRule -DisplayName "Allow HTTP" -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow
+   7 iisreset
